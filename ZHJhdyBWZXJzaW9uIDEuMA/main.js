@@ -6,13 +6,13 @@ let lotteryInterval = null;
 let lastItem = null;
 // 上次抽中的人
 let lastplayer = 1;
-// 闪烁速度，每秒钟 20 次，大部分人的 反应速度都没这么快
-const flashSpeed = 20;
+// 闪烁速度，每秒钟 25 次
+const flashSpeed = 25;
 // 背景图片数量
 const bgImageCount = 7;
 // 送礼物的人的目标
 // 此处等待填写
-const player = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41];
+const player = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41];
 
 // 设置奖池 placeholder 提示
 $('#prizePoolText').attr('placeholder', "铅笔 10\r\n橡皮 5\r\n100元 0");
@@ -204,15 +204,12 @@ function initSkin() {
 
     // 读取之前设置过的背景图片
     let lastBgImage = localStorage.getItem('lastBgImage');
-    console.log(lastBgImage);
     if (typeof lastBgImage === 'string' && lastBgImage.trim().length !== 0) {
         // 设置背景
         $('body').css({'background-image': `url("${lastBgImage}")`, 'background-repeat': 'repeat'});
         // 设置高亮
         $(`img[src="${lastBgImage}"]`).parent().addClass('red');
-    }
-    else
-    {
+    } else {
         // 设置背景
         $('body').css({'background-image': `url("background/2.jpg")`, 'background-repeat': 'repeat'});
         // 设置高亮
@@ -222,7 +219,7 @@ function initSkin() {
 
 // 初始化
 function init() {
-    prizePoolText.value="1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41";
+    prizePoolText.value = "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41";
     // 设置抽奖按钮
     $('#controlButton').click(function () {
         let startTitle = '开始抽奖';
@@ -242,9 +239,9 @@ function init() {
                 animation: 'pulse',
                 duration: `${parseInt(1000 / flashSpeed) * 2}ms`
             });
-            prizeList.splice(lastplayer-1,1);
-            $('div#ListItem'+lastplayer).remove();
-            lastplayer=player[lastplayer];
+            prizeList.splice(lastplayer - 1, 1);
+            $('div#ListItem' + lastplayer).remove();
+            lastplayer = player[lastplayer];
             $(this).text(startTitle);
         }
     });
@@ -284,7 +281,7 @@ function init() {
     if (typeof titleText === 'string') {
         $('[name="titleText"]').val(titleText);
     } else {
-        $('[name="titleText"]').val('圣诞抽奖');
+        $('[name="titleText"]').val('Happy Christmas!');
     }
     // 根据标题设置修改页面
     setHeader();
